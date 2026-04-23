@@ -11,3 +11,12 @@ class MyHandler(SimpleHTTPRequestHandler):
 server = HTTPServer(("0.0.0.0", PORT), MyHandler)
 print(f"Server running on port {PORT}...")
 server.serve_forever()
+
+
+
+from http.server import *
+class H(SimpleHTTPRequestHandler):
+    def do_GET(s):
+        s.send_response(200); s.end_headers()
+        s.wfile.write(b"Hello from Docker")
+HTTPServer(("",5020),H).serve_forever()
